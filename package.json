@@ -1,6 +1,6 @@
 {
   "name": "zeenom-capacitor-social-login",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Plugin to support google sso login for ios",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
