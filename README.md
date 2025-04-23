@@ -1,2 +1,37 @@
-# zeenom-capacitor-social-login
-This plugin enables easy Google sign-in using native iOS and Android APIs. It offers secure, seamless authentication across Android, iOS, and web, with a simple and developer-friendly interface for fast integration.
+# zeenom
+
+Plugin to support google sso login for ios
+
+## Install
+
+```bash
+npm install zeenom
+npx cap sync
+```
+
+## API
+
+<docgen-index>
+
+* [`echo(...)`](#echo)
+
+</docgen-index>
+
+<docgen-api>
+<!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
+
+### echo(...)
+
+```typescript
+echo(options: { value: string; }) => Promise<{ value: string; }>
+```
+
+| Param         | Type                            |
+| ------------- | ------------------------------- |
+| **`options`** | <code>{ value: string; }</code> |
+
+**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
+
+--------------------
+
+</docgen-api>
