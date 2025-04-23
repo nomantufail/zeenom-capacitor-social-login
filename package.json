@@ -1,5 +1,5 @@
 {
-  "name": "zeenom",
+  "name": "zeenom-capacitor-social-login",
   "version": "0.0.1",
   "description": "Plugin to support google sso login for ios",
   "main": "dist/plugin.cjs.js",
@@ -15,7 +15,7 @@
     "Package.swift",
     "Zeenom.podspec"
   ],
-  "author": "Zeeshan",
+  "author": "Noman",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
