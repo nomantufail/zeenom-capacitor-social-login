@@ -13,7 +13,7 @@
     "ios/Sources",
     "ios/Tests",
     "Package.swift",
-    "Zeenom.podspec"
+    "ZeenomCapacitorSocialLogin.podspec"
   ],
   "author": "Noman",
   "license": "Apache-2.0",
