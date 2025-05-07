@@ -25,14 +25,20 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import org.json.JSONObject;
+
 @CapacitorPlugin(name = "LoginPlugin")
 public class LoginPluginPlugin extends Plugin {
 
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
     private FirebaseAuth firebaseAuth;
-
     private ActivityResultLauncher<IntentSenderRequest> signInLauncher;
+    private String callId;
+    private String projectId;
+    private String applicationId;
+    private String apiKey;
+    private String clientId;
 
     @NonNull
     private ActivityResultLauncher<IntentSenderRequest> signInLauncher() {
@@ -93,10 +99,18 @@ public class LoginPluginPlugin extends Plugin {
     public void load() {
         super.load();
         signInLauncher = signInLauncher();
+
+    }
+
+    @PluginMethod
+    public void echo(PluginCall call) {
+        String value = call.getString("value");
+        Log.i("Zeeshan_debug", "Echo called: " + value);
+        fetchGoogleJson(value);
         FirebaseOptions options = new FirebaseOptions.Builder()
-                .setProjectId("login-plugin-cc824")
-                .setApplicationId("1:394556941374:android:1ff959a91a2cc95c129d6f")
-                .setApiKey("AIzaSyCON86ECP_4ZoUzyK1IZLhHDcmQIB6Vuf0")
+                .setProjectId(this.projectId)
+                .setApplicationId(this.applicationId)
+                .setApiKey(this.apiKey)
                 .build();
 
         if (FirebaseApp.getApps(getActivity()).isEmpty()) {
@@ -111,23 +125,27 @@ public class LoginPluginPlugin extends Plugin {
                 .setGoogleIdTokenRequestOptions(
                         BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                                 .setSupported(true)
-                                .setServerClientId("394556941374-7t8udgrmmp21og7dhi7vqtqp920dop4g.apps.googleusercontent.com")
+                                .setServerClientId(this.clientId)
                                 .setFilterByAuthorizedAccounts(false)
                                 .build()
                 )
                 .setAutoSelectEnabled(false)
                 .build();
-    }
-
-    private String callId;
-
-    @PluginMethod
-    public void echo(PluginCall call) {
-
-        Log.i("Zeeshan_debug", "Echo called: " + call.getString("value"));
 
         bridge.saveCall(call);
         callId = call.getCallbackId();
         signInWithGoogle();
+    }
+
+    private void fetchGoogleJson(String value) {
+        try {
+            JSONObject config = new JSONObject(value);
+            this.apiKey = config.getString("apiKey");
+            this.clientId = config.getString("clientId");
+            this.projectId = config.getString("projectId");
+            this.applicationId = config.getString("appId");
+        } catch (Exception e) {
+            Log.e("MainActivity", "Error parsing JSON: " + e.getMessage());
+        }
     }
 }

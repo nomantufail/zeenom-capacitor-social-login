@@ -2,11 +2,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "Zeenom",
+    name: "zeenom-capacitor-social-login",
     platforms: [.iOS(.v14)],
     products: [
         .library(
-            name: "Zeenom",
+            name: "zeenom-capacitor-social-login",
             targets: ["LoginPluginPlugin"])
     ],
     dependencies: [
