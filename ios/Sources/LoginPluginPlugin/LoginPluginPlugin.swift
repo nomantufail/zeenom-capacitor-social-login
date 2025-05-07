@@ -96,8 +96,8 @@ public class LoginPluginPlugin: CAPPlugin, CAPBridgedPlugin {
 
         do {
             if let configDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                guard let googleAppID = configDict["GOOGLE_APP_ID"] as? String,
-                      let gcmSenderID = configDict["GCM_SENDER_ID"] as? String
+                guard let googleAppID = configDict["appId"] as? String,
+                      let gcmSenderID = configDict["messagingSenderId"] as? String
                 else {
                     print("Error: Missing required Firebase config values")
                     completion(false, "Missing required Firebase config values")
@@ -105,13 +105,13 @@ public class LoginPluginPlugin: CAPPlugin, CAPBridgedPlugin {
                 }
 
                 let options = FirebaseOptions(googleAppID: googleAppID, gcmSenderID: gcmSenderID)
-                options.apiKey = (configDict["API_KEY"] as! String)
-                options.clientID = (configDict["CLIENT_ID"] as! String)
-                options.projectID = (configDict["PROJECT_ID"] as! String)
-                options.bundleID = configDict["BUNDLE_ID"] as! String
-                options.storageBucket = configDict["STORAGE_BUCKET"] as? String
-                options.googleAppID = configDict["GOOGLE_APP_ID"] as! String
-                options.gcmSenderID = configDict["GCM_SENDER_ID"] as! String
+                options.apiKey = (configDict["apiKey"] as! String)
+                options.clientID = (configDict["clientId"] as! String)
+                options.projectID = (configDict["projectId"] as! String)
+                options.bundleID = configDict["bundleId"] as! String
+                options.storageBucket = configDict["storageBucket"] as? String
+                options.googleAppID = googleAppID
+                options.gcmSenderID = gcmSenderID
 
                 DispatchQueue.main.async {
                     if FirebaseApp.app() == nil {
