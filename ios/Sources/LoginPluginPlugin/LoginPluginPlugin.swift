@@ -144,6 +144,9 @@ extension UIViewController: ASAuthorizationControllerDelegate, ASAuthorizationCo
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.
         print("Sign in with Apple errored: \(error)")
+        pluginCall?.resolve([
+            "value": "Sign in with Apple errored: \(error)"
+        ])
     }
 
 }
